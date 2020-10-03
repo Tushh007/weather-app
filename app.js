@@ -1,4 +1,5 @@
 const request = require('postman-request')
+const geocode = require('./utils/geocode')
 
 // const url = 'http://api.weatherstack.com/current?access_key=d87ff57c2d8ec4b5ebe3b91df4d9b7d5&query=37.8267,-122.4233&units=s'
 
@@ -12,16 +13,7 @@ const request = require('postman-request')
 //     }
 // })
 
-// Geocoding 
-const geo_url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoidHVzaGFybGFuZ2VyIiwiYSI6ImNrZnRwNDY1NjA4dHQzNXBraTBkeml3djkifQ.4oEqnpirqL1qIEqVn2EO2g' 
-
-request({url: geo_url, json: true}, (error, response) => {
-    if (error) {
-        console.log('Unable to connect to the location services.')
-    } else if (response.body.features.length === 0) {
-        console.log('Unable to find location. Try again with different location.')
-    } else {
-        console.log(`latitude: ${response.body.features[0].center[1]} longitude: ${response.body.features[0].center[0]}`)
-    }
-    
+geocode('New York', (error, data) => {
+    console.log('Error', error)
+    console.log('Data', data)
 })
